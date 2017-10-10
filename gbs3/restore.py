@@ -8,9 +8,10 @@ from gbs3.util import eprint
 
 
 def restore(s3, object_name):
+    bucket = s3.Bucket(S3_BUCKET_NAME)
     with tempfile.TemporaryFile() as f:
         eprint('downloading', object_name)
-        s3.download_fileobj(S3_BUCKET_NAME, object_name, f)
+        bucket.download_fileobj(object_name, f)
 
         f.seek(0)
 

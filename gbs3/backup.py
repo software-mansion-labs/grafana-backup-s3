@@ -42,10 +42,10 @@ def backup(s3):
                                  root_dir=os.path.join(tmp_dir, 'data'),
                                  base_dir='./')
 
-        # TODO Delete old backups or don't upload exact backup as
-        #      the most recent one
+        bucket = s3.Bucket(S3_BUCKET_NAME)
+
         eprint('uploading archive to S3')
-        s3.upload_file(bk, S3_BUCKET_NAME, object_name)
+        bucket.upload_file(bk, object_name)
 
         eprint('backup uploaded to:', object_name)
 

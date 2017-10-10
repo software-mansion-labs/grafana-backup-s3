@@ -1,20 +1,42 @@
 # grafana-backup-s3
 
-Simple tool for backing up & restoring Grafana dashboards and data sources and uploading them to S3 bucket.
+Simple tool for backing up & restoring Grafana dashboards and data sources and uploading them to S3 bucket. It also works with DigitalOcean Spaces.
 
 Portions based on [ysde/grafana-backup-tool].
 
 ## Usage
 ```
-usage: grafana-backup-s3.py [-h] [--restore BACKUP_OBJECT_NAME]
+$ ./grafana-backup-s3.py -h
+usage: grafana-backup-s3.py [-h] {backup,restore} ...
 
-Backups Grafana dashboards and uploads them to S3 bucket. Without any
-arguments, backup will be performed.
+Backups Grafana dashboards and uploads them to S3 bucket.
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --restore BACKUP_OBJECT_NAME
-                        restore backup from given S3 object
+  -h, --help        show this help message and exit
+
+actions:
+  {backup,restore}
+    backup          performs backup
+    restore         restores latest backup
+
+$ ./grafana-backup-s3.py backup -h
+usage: grafana-backup-s3.py backup [-h]
+
+Performs backup.
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+$ ./grafana-backup-s3.py restore -h
+usage: grafana-backup-s3.py restore [-h] object_name
+
+Restores latest backup
+
+positional arguments:
+  object_name  S3 backup object name to restore
+
+optional arguments:
+  -h, --help   show this help message and exit
 ```
 
 ## Configuration
